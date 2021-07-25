@@ -1,0 +1,70 @@
+name: home 
+on:
+  push:
+    branches: 
+      - master
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material 
+      - run: mkdocs gh-deploy --force
+
+site_name: 常开颜
+nav:
+    - Home: 'index.md'
+    - 'User Guide':
+        - 'Writing your docs': 'writing-your-docs.md'
+        - 'Styling your docs': 'styling-your-docs.md'
+    - About:
+        - 'License': 'license.md'
+        - 'Release Notes': 'release-notes.md'
+        
+extra:
+  generator: false
+
+  social:
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:changkaiyan@qq.com
+      name: squidfunk on Twitter
+copyright: Copyright &copy; 2021 - 2021 常开颜
+
+  
+plugins:
+    - search
+    - awesome-pages
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: false
+  - toc:
+      permalink: true
+  - footnotes
+  - meta
+  - def_list
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_png
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.tilde
